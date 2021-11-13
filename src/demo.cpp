@@ -1,9 +1,16 @@
+//
+// Copyright (c) 2021 David Holmes (dholmes at dholmes dot us)
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #include "term.hpp"
 
-#include <fmt/format.h>
-#include <fmt/ostream.h>
+#include <fmt/core.h>
 
 int main()
 {
-    fmt::print("{}\n", term::greeting{"World"});
+    dh::color c;
+    fmt::print("{0:red}Hello {0:yellow}World{0:blue}!{0:reset}\n", c);
 }
