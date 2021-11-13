@@ -1,7 +1,7 @@
-add_library(hello greeting.cpp greeting.hpp)
-target_include_directories(hello INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(hello PUBLIC project_options 
-                            PRIVATE project_warnings)
+add_library(term term.cpp term.hpp)
+target_include_directories(term INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(term PUBLIC project_options 
+                           PRIVATE project_warnings)
 
-add_executable(hello_app main.cpp)
-target_link_libraries(hello_app PRIVATE project_options project_warnings hello fmt::fmt)
+add_executable(demo demo.cpp)
+target_link_libraries(demo PRIVATE project_options project_warnings term fmt::fmt)

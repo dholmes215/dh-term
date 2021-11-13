@@ -1,4 +1,4 @@
-#include <greeting.hpp>
+#include <term.hpp>
 
 #include <catch2/catch.hpp>
 
@@ -15,7 +15,7 @@ auto to_string(const auto& printable) -> std::string
 
 TEST_CASE("Greetings are printed correctly", "[greeting]")
 {
-    CHECK(to_string(hello::greeting{}) == "Hello!");
-    CHECK(to_string(hello::greeting{"World"}) == "Hello World!");
-    CHECK(to_string(hello::greeting{"David"}) == "Hello David!");
+    CHECK(to_string(term::greeting{}) == "Hello!");
+    CHECK(to_string(term::greeting{"World"}) == "Hello World!");
+    CHECK(to_string(term::greeting{"David"}) == "Hello David!");
 }
