@@ -32,7 +32,7 @@ include(cmake/StaticAnalyzers.cmake)
 
 add_subdirectory(src)
 
+# Test the library.
 include(CTest)
 include(Catch)
-
 add_subdirectory(tests)
