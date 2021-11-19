@@ -18,14 +18,7 @@ project(term VERSION 0.0.1
 find_package(Catch2 REQUIRED)
 find_package(fmt REQUIRED)
 
-# Targets can "link" this "library" to inherit project options.
-add_library(project_options INTERFACE)
-target_compile_features(project_options INTERFACE cxx_std_20) # Require _at least_ C++20.
-
-# Targets can "link" this "library" to inherit the warnings specified in CompilerWarnings.cmake.
-add_library(project_warnings INTERFACE)
 include(cmake/CompilerWarnings.cmake)
-set_project_warnings(project_warnings)
 
 # Allow for static analysis options.
 include(cmake/StaticAnalyzers.cmake)
@@ -36,3 +29,5 @@ add_subdirectory(src)
 include(CTest)
 include(Catch)
 add_subdirectory(tests)
+
+
