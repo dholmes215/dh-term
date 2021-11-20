@@ -16,7 +16,7 @@ project(term VERSION 0.0.1
 
 # Find dependencies.
 find_package(Catch2 REQUIRED)
-find_package(fmt REQUIRED)
+find_package(fmt 8.0.1 REQUIRED)
 
 include(cmake/CompilerWarnings.cmake)
 
@@ -30,4 +30,32 @@ include(CTest)
 include(Catch)
 add_subdirectory(tests)
 
+# Create package configuration file.
+include(CMakePackageConfigHelpers)
 
+configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/TermConfig.cmake.in
+                              "${CMAKE_CURRENT_BINARY_DIR}/TermConfig.cmake"
+                              INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/term)
+
+# Create package version file.
+set(version 0.0.1)
+
+set_property(TARGET term PROPERTY VERSION ${version})
+# set_property(TARGET term PROPERTY SOVERSION 3)
+set_property(TARGET term PROPERTY
+             INTERFACE_term_MAJOR_VERSION 0)
+set_property(TARGET term APPEND PROPERTY
+             COMPATIBLE_INTERFACE_STRING term_MAJOR_VERSION)
+
+# generate the version file for the config file
+write_basic_package_version_file(
+    "${CMAKE_CURRENT_BINARY_DIR}/TermConfigVersion.cmake"
+    VERSION "${version}"
+    COMPATIBILITY AnyNewerVersion
+)
+
+# Install package configuration & version files.
+install(FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/TermConfig.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/TermConfigVersion.cmake"
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/term)

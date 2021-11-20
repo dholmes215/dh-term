@@ -33,4 +33,3 @@ install(EXPORT TermTargets
         FILE TermTargets.cmake
         NAMESPACE term::
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/term)
-
