@@ -11,26 +11,67 @@
 #include <fmt/core.h>
 #include <fmt/format.h>
 
+#include <algorithm>
+#include <array>
 #include <string>
-#include <string_view>
 
 namespace dh {
 
 struct color final {
 };
 
-enum class sgr_code : uint8_t;
+enum class sgr_code : uint8_t {
+    reset = 0,
+    bold = 1,
+    faint = 2,
+    italic = 3,
+    underline = 4,
+    slow_blink = 5,
+    rapid_blink = 6,
+    reverse_video = 7,
+    conceal = 8,
+    crossed_out = 9,
+    black = 30,
+    red = 31,
+    green = 32,
+    yellow = 33,
+    blue = 34,
+    magenta = 35,
+    cyan = 36,
+    white = 37,
+};
 
-sgr_code lookup(const std::string_view name);
+constexpr sgr_code lookup(std::string_view name)
+{
+    constexpr std::array<std::string_view, 18> names{
+        "reset",      "bold",        "faint",         "italic",  "underline",
+        "slow_blink", "rapid_blink", "reverse_video", "conceal", "crossed_out",
+        "black",      "red",         "green",         "yellow",  "blue",
+        "magenta",    "cyan",        "white"};
+
+    constexpr std::array sgrs{
+        sgr_code::reset,       sgr_code::bold,          sgr_code::faint,
+        sgr_code::italic,      sgr_code::underline,     sgr_code::slow_blink,
+        sgr_code::rapid_blink, sgr_code::reverse_video, sgr_code::conceal,
+        sgr_code::crossed_out, sgr_code::black,         sgr_code::red,
+        sgr_code::green,       sgr_code::yellow,        sgr_code::blue,
+        sgr_code::magenta,     sgr_code::cyan,          sgr_code::white};
+
+    auto found = std::find(names.begin(), names.end(), name);
+    if (found == names.end()) {
+        throw "invalid sgr name";
+    }
+    return sgrs[static_cast<std::size_t>(std::distance(names.begin(), found))];
+}
 
 }  // namespace dh
 
-// Custom formatter for aoc::solution_id
+// Custom formatter for dh::color
 template <>
 struct fmt::formatter<dh::color> {
     dh::sgr_code code{};
 
-    /*constexpr*/ auto parse(format_parse_context& ctx) -> decltype(ctx.begin())
+    constexpr auto parse(format_parse_context& ctx) -> decltype(ctx.begin())
     {
         auto it = ctx.begin();
         const auto end = std::find(ctx.begin(), ctx.end(), '}');
