@@ -9,10 +9,10 @@ update_submodule("${CMAKE_CURRENT_LIST_DIR}/vcpkg")
 include(cmake/ConfigureVcpkg.cmake)
 configure_vcpkg("${CMAKE_CURRENT_LIST_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake")
 
-project(term VERSION 0.0.1
-              DESCRIPTION "dh::term library for vt100/xterm-style terminals "
-              HOMEPAGE_URL https://github.com/dholmes215/term
-              LANGUAGES CXX)
+project(dh-term VERSION 0.0.1
+                DESCRIPTION "dh::term library for vt100/xterm-style terminals "
+                HOMEPAGE_URL https://github.com/dholmes215/term
+                LANGUAGES CXX)
 
 # Find dependencies.
 find_package(Catch2 REQUIRED)
@@ -33,8 +33,8 @@ add_subdirectory(tests)
 # Create package configuration file.
 include(CMakePackageConfigHelpers)
 
-configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/TermConfig.cmake.in
-                              "${CMAKE_CURRENT_BINARY_DIR}/TermConfig.cmake"
+configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/term-config.cmake.in
+                              "${CMAKE_CURRENT_BINARY_DIR}/term-config.cmake"
                               INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/term)
 
 # Create package version file.
@@ -49,13 +49,13 @@ set_property(TARGET term APPEND PROPERTY
 
 # generate the version file for the config file
 write_basic_package_version_file(
-    "${CMAKE_CURRENT_BINARY_DIR}/TermConfigVersion.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/term-config-version.cmake"
     VERSION "${version}"
     COMPATIBILITY AnyNewerVersion
 )
 
 # Install package configuration & version files.
 install(FILES
-        "${CMAKE_CURRENT_BINARY_DIR}/TermConfig.cmake"
-        "${CMAKE_CURRENT_BINARY_DIR}/TermConfigVersion.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/term-config.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/term-config-version.cmake"
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/term)

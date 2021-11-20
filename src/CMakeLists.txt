@@ -20,7 +20,7 @@ if(NOT WIN32 AND CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 endif()
 
 install(TARGETS term
-        EXPORT TermTargets
+        EXPORT term-targets
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
@@ -29,7 +29,7 @@ install(TARGETS term
 install(FILES ${term_INC} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 # Install exported targets.
-install(EXPORT TermTargets
-        FILE TermTargets.cmake
-        NAMESPACE term::
+install(EXPORT term-targets
+        FILE term-targets.cmake
+        NAMESPACE dh::
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/term)
