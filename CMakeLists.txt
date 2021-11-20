@@ -33,29 +33,29 @@ add_subdirectory(tests)
 # Create package configuration file.
 include(CMakePackageConfigHelpers)
 
-configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/term-config.cmake.in
-                              "${CMAKE_CURRENT_BINARY_DIR}/term-config.cmake"
-                              INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/term)
+configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/dh-term-config.cmake.in
+                              "${CMAKE_CURRENT_BINARY_DIR}/dh-term-config.cmake"
+                              INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/dh-term)
 
 # Create package version file.
 set(version 0.0.1)
 
-set_property(TARGET term PROPERTY VERSION ${version})
+set_property(TARGET dh-term PROPERTY VERSION ${version})
 # set_property(TARGET term PROPERTY SOVERSION 3)
-set_property(TARGET term PROPERTY
+set_property(TARGET dh-term PROPERTY
              INTERFACE_term_MAJOR_VERSION 0)
-set_property(TARGET term APPEND PROPERTY
+set_property(TARGET dh-term APPEND PROPERTY
              COMPATIBLE_INTERFACE_STRING term_MAJOR_VERSION)
 
 # generate the version file for the config file
 write_basic_package_version_file(
-    "${CMAKE_CURRENT_BINARY_DIR}/term-config-version.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/dh-term-config-version.cmake"
     VERSION "${version}"
     COMPATIBILITY AnyNewerVersion
 )
 
 # Install package configuration & version files.
 install(FILES
-        "${CMAKE_CURRENT_BINARY_DIR}/term-config.cmake"
-        "${CMAKE_CURRENT_BINARY_DIR}/term-config-version.cmake"
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/term)
+        "${CMAKE_CURRENT_BINARY_DIR}/dh-term-config.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/dh-term-config-version.cmake"
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/dh-term)

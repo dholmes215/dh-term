@@ -1,0 +1,8 @@
+@PACKAGE_INIT@
+
+include("${CMAKE_CURRENT_LIST_DIR}/dh-term-targets.cmake")
+
+check_required_components(dh-term)
+
+include(CMakeFindDependencyMacro)
+find_dependency(fmt 8.0.1)

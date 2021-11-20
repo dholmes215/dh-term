@@ -1,8 +1,0 @@
-@PACKAGE_INIT@
-
-include("${CMAKE_CURRENT_LIST_DIR}/term-targets.cmake")
-
-check_required_components(term)
-
-include(CMakeFindDependencyMacro)
-find_dependency(fmt 8.0.1)
