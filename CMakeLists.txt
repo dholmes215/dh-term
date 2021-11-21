@@ -48,7 +48,7 @@ set(version 0.0.1)
 set_property(TARGET dh-term PROPERTY VERSION ${version})
 # set_property(TARGET term PROPERTY SOVERSION 3)
 set_property(TARGET dh-term PROPERTY
-             INTERFACE_term_MAJOR_VERSION 0)
+             INTERFACE_dh-term_MAJOR_VERSION 0)
 set_property(TARGET dh-term APPEND PROPERTY
              COMPATIBLE_INTERFACE_STRING term_MAJOR_VERSION)
 
