@@ -14,8 +14,10 @@ project(dh-term VERSION 0.0.1
                 HOMEPAGE_URL https://github.com/dholmes215/term
                 LANGUAGES CXX)
 
+# Disable testing by default.
+option(BUILD_TESTING "Build the testing tree." OFF)
+
 # Find dependencies.
-find_package(Catch2 REQUIRED)
 find_package(fmt 8.0.1 REQUIRED)
 
 include(cmake/CompilerWarnings.cmake)
@@ -25,10 +27,13 @@ include(cmake/StaticAnalyzers.cmake)
 
 add_subdirectory(src)
 
-# Test the library.
-include(CTest)
-include(Catch)
-add_subdirectory(tests)
+if (BUILD_TESTING)
+    # Test the library.
+    find_package(Catch2 REQUIRED)
+    include(CTest)
+    include(Catch)
+    add_subdirectory(tests)
+endif()
 
 # Create package configuration file.
 include(CMakePackageConfigHelpers)
