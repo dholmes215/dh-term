@@ -37,13 +37,14 @@ endif()
 
 # Create package configuration file.
 include(CMakePackageConfigHelpers)
+include(GNUInstallDirs)
 
 configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/dh-term-config.cmake.in
                               "${CMAKE_CURRENT_BINARY_DIR}/dh-term-config.cmake"
-                              INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/dh-term)
+                              INSTALL_DESTINATION ${CMAKE_INSTALL_DATADIR}/cmake/dh-term
+                              NO_SET_AND_CHECK_MACRO)
 
 # Create package version file.
-set(version 0.0.1)
 
 set_property(TARGET dh-term PROPERTY VERSION ${version})
 # set_property(TARGET term PROPERTY SOVERSION 3)
@@ -55,7 +56,7 @@ set_property(TARGET dh-term APPEND PROPERTY
 # generate the version file for the config file
 write_basic_package_version_file(
     "${CMAKE_CURRENT_BINARY_DIR}/dh-term-config-version.cmake"
-    VERSION "${version}"
+    VERSION "${dh-term_VERSION}"
     COMPATIBILITY AnyNewerVersion
 )
 
@@ -63,4 +64,24 @@ write_basic_package_version_file(
 install(FILES
         "${CMAKE_CURRENT_BINARY_DIR}/dh-term-config.cmake"
         "${CMAKE_CURRENT_BINARY_DIR}/dh-term-config-version.cmake"
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/dh-term)
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/cmake/dh-term)
+
+# Install the library.
+# if(NOT WIN32 AND CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+#     set(CMAKE_INSTALL_PREFIX "/opt/dholmes.us/${PROJECT_NAME}")
+# endif()
+
+install(TARGETS dh-term
+        EXPORT dh-term-targets)
+        # LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        # ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        # INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+# Install public headers.
+install(FILES ${term_INC} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+# Install exported targets.
+install(EXPORT dh-term-targets
+        FILE dh-term-targets.cmake
+        NAMESPACE dh::
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/cmake/dh-term)
