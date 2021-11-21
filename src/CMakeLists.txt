@@ -1,17 +1,17 @@
 set(term_SRC term.cpp)
 set(term_INC term.hpp)
 
-add_library(dh-term STATIC ${term_SRC} ${term_INC})
-target_compile_features(dh-term PUBLIC cxx_std_20) # Require _at least_ C++20.
-set_project_warnings(dh-term)
-target_include_directories(dh-term INTERFACE
+add_library(term STATIC ${term_SRC} ${term_INC})
+target_compile_features(term PUBLIC cxx_std_20) # Require _at least_ C++20.
+set_project_warnings(term)
+target_include_directories(term INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
-target_link_libraries(dh-term PRIVATE fmt::fmt)
+target_link_libraries(term PRIVATE fmt::fmt)
 
 add_executable(demo demo.cpp)
 set_project_warnings(demo)
-target_link_libraries(demo PRIVATE dh-term fmt::fmt)
+target_link_libraries(demo PRIVATE term fmt::fmt)
 
 # Install the library.
 include(GNUInstallDirs)
@@ -20,7 +20,7 @@ include(GNUInstallDirs)
 #     set(CMAKE_INSTALL_PREFIX "/opt/dholmes.us/${PROJECT_NAME}")
 # endif()
 
-install(TARGETS dh-term
+install(TARGETS term
         EXPORT dh-term-targets
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}

@@ -45,19 +45,10 @@ configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/dh-term-config.c
                               NO_SET_AND_CHECK_MACRO)
 
 # Create package version file.
-
-set_property(TARGET dh-term PROPERTY VERSION ${version})
-# set_property(TARGET term PROPERTY SOVERSION 3)
-set_property(TARGET dh-term PROPERTY
-             INTERFACE_dh-term_MAJOR_VERSION 0)
-set_property(TARGET dh-term APPEND PROPERTY
-             COMPATIBLE_INTERFACE_STRING term_MAJOR_VERSION)
-
-# generate the version file for the config file
 write_basic_package_version_file(
     "${CMAKE_CURRENT_BINARY_DIR}/dh-term-config-version.cmake"
     VERSION "${dh-term_VERSION}"
-    COMPATIBILITY AnyNewerVersion
+    COMPATIBILITY SameMajorVersion
 )
 
 # Install package configuration & version files.
