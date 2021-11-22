@@ -20,8 +20,6 @@ option(BUILD_TESTING "Build the testing tree." OFF)
 # Find dependencies.
 find_package(fmt 8.0.1 REQUIRED)
 
-include(cmake/CompilerWarnings.cmake)
-
 # Allow for static analysis options.
 include(cmake/StaticAnalyzers.cmake)
 
