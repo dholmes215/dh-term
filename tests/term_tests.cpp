@@ -9,7 +9,7 @@
 
 #include <fmt/core.h>
 #include <fmt/format.h>
-#include <catch2/catch.hpp>
+#include <catch2/catch_all.hpp>
 
 TEST_CASE("Colors are printed correctly", "[color]")
 {
