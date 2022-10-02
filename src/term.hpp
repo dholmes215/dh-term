@@ -93,7 +93,7 @@ struct fmt::formatter<dh::color> {
     template <typename FormatContext>
     auto format(const dh::color, FormatContext& ctx)
     {
-        return format_to(ctx.out(), "\x1B[{}m", static_cast<int>(code));
+        return fmt::format_to(ctx.out(), "\x1B[{}m", static_cast<int>(code));
     }
 };
 
