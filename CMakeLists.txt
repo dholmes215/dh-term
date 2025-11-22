@@ -18,7 +18,7 @@ project(dh-term VERSION 0.0.2
 option(BUILD_TESTING "Build the testing tree." OFF)
 
 # Find dependencies.
-find_package(fmt 9.0.0 REQUIRED)
+find_package(fmt REQUIRED)
 
 # Allow for static analysis options.
 include(cmake/StaticAnalyzers.cmake)
