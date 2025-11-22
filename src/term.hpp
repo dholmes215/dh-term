@@ -8,12 +8,10 @@
 #ifndef TERM_HPP
 #define TERM_HPP
 
-#include <fmt/core.h>
 #include <fmt/format.h>
 
 #include <algorithm>
 #include <array>
-#include <string>
 
 namespace dh {
 
