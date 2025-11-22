@@ -39,7 +39,7 @@ enum class sgr_code : uint8_t {
     white = 37,
 };
 
-constexpr sgr_code lookup(std::string_view name)
+constexpr sgr_code lookup(const std::string_view name)
 {
     constexpr std::array<std::string_view, 18> names{
         "reset",      "bold",        "faint",         "italic",  "underline",
@@ -55,7 +55,7 @@ constexpr sgr_code lookup(std::string_view name)
         sgr_code::green,       sgr_code::yellow,        sgr_code::blue,
         sgr_code::magenta,     sgr_code::cyan,          sgr_code::white};
 
-    auto found = std::find(names.begin(), names.end(), name);
+    const auto found = std::ranges::find(names, name);
     if (found == names.end()) {
         throw "invalid sgr name";
     }
@@ -72,7 +72,7 @@ struct fmt::formatter<dh::color> {
     constexpr auto parse(format_parse_context& ctx) -> decltype(ctx.begin())
     {
         auto it = ctx.begin();
-        const auto end = std::find(ctx.begin(), ctx.end(), '}');
+        const auto end = std::ranges::find(ctx, '}');
 
         // auto token_end = it;
         // while ((token_end = std::find(it, end, ',')) != end) {
@@ -89,7 +89,7 @@ struct fmt::formatter<dh::color> {
     }
 
     template <typename FormatContext>
-    auto format(const dh::color, FormatContext& ctx) const
+    auto format(const dh::color /*unused*/, FormatContext& ctx) const
     {
         return fmt::format_to(ctx.out(), "\x1B[{}m", static_cast<int>(code));
     }
