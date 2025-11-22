@@ -9,7 +9,7 @@ update_submodule("${CMAKE_CURRENT_LIST_DIR}/vcpkg")
 include(cmake/ConfigureVcpkg.cmake)
 configure_vcpkg("${CMAKE_CURRENT_LIST_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake")
 
-project(dh-term VERSION 0.0.2
+project(dh-term VERSION 0.0.3
                 DESCRIPTION "dh::term library for vt100/xterm-style terminals "
                 HOMEPAGE_URL https://github.com/dholmes215/term
                 LANGUAGES CXX)
